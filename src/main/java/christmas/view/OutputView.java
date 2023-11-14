@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.constants.BadgeConstant;
+import christmas.constants.EventConstant;
 import christmas.constants.OutputMessage;
 import christmas.domain.Order;
 import christmas.domain.Price;
@@ -42,6 +43,12 @@ public class OutputView {
     public static void printBeforeDiscountPrice(Price price) {
         System.out.println(OutputMessage.PRICE_BEFORE_DISCOUNT);
         printFormattedPrice(price.getBeforeDiscountPrice());
+        printNextLine();
+        if (price.getBeforeDiscountPrice() < EventConstant.DISCOUNT_AVAILABLE_CHARGE) {
+            printFormattedPrice(EventConstant.DISCOUNT_AVAILABLE_CHARGE - price.getBeforeDiscountPrice());
+            System.out.println("만큼 더 주문하시면 할인을 받을 수 있습니다.");
+        }
+        printNextLine();
     }
 
     public static void printGift(MenuList giftList) {
@@ -64,6 +71,7 @@ public class OutputView {
                 System.out.print(discountInfo.getKey() + ": ");
                 printFormattedPrice(-discountInfo.getValue());
                 printNextLine();
+                printNextLine();
                 return;
             }
             System.out.println(OutputMessage.NONE);
@@ -79,12 +87,14 @@ public class OutputView {
         int totalDiscount = PriceService.calculateTotalDiscount(price);
         printFormattedPrice(totalDiscount);
         printNextLine();
+        printNextLine();
     }
 
     public static void printExpectedPayment(Price price) {
         System.out.println(OutputMessage.EXPECTEDPAYMENT);
         int expectedPayment = PriceService.expectPayment(price);
         printFormattedPrice(expectedPayment);
+        printNextLine();
         printNextLine();
     }
 
@@ -113,6 +123,6 @@ public class OutputView {
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         String formattedPrice = numberFormat.format(price);
         System.out.print(formattedPrice);
-        System.out.println("원");
+        System.out.print("원");
     }
 }
