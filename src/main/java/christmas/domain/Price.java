@@ -1,7 +1,9 @@
 package christmas.domain;
 
+import christmas.constants.EventConstant;
 import christmas.domain.calendar.DecemberCalendar;
 import christmas.domain.menu.MenuList;
+import christmas.domain.menusheet.DrinkList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,33 +31,34 @@ public class Price {
 
     private void applyDdayDiscount(DecemberCalendar dayInfo) {
         int discount = 0;
-        if (dayInfo.getDate() <= 25) {
-            discount += 1000 + (dayInfo.getDate() - 1) * 100;
-            discountPrice.put("크리스마스 디데이 할인", discount);
+        if (dayInfo.getDate() <= EventConstant.D_DAY_EVENT_DEADLINE) {
+            discount += EventConstant.D_DAY_DISCOUNT_START_MONEY
+                    + (dayInfo.getDate() - 1) * EventConstant.D_DAY_DISCOUNT_MONEY;
+            discountPrice.put(EventConstant.CHRISTMAS_D_DAY_DISCOUNT, discount);
         }
     }
 
     private void applyDayOfTheWeekDiscount(DecemberCalendar dayInfo, MenuList menuList) {
         int discount = 0;
         if (isWeekdayDiscountPossible(dayInfo, menuList)) {
-            discount += 2023 * menuList.countDessertMenu();
-            discountPrice.put("평일 할인", discount);
+            discount += EventConstant.DAY_OF_WEEK_DISCOUNT_MONEY * menuList.countDessertMenu();
+            discountPrice.put(EventConstant.WEEKDAY_DISCOUNT, discount);
         }
         if (isWeekendDiscountPossible(dayInfo, menuList)) {
-            discount += 2023 * menuList.countMainMenu();
-            discountPrice.put("주말 할인", discount);
+            discount += EventConstant.DAY_OF_WEEK_DISCOUNT_MONEY * menuList.countMainMenu();
+            discountPrice.put(EventConstant.WEEKEND_DISCOUNT, discount);
         }
     }
 
     private void applySpecialDiscount(DecemberCalendar dayInfo) {
         if (dayInfo.isStar()) {
-            discountPrice.put("특별 할인", 1000);
+            discountPrice.put(EventConstant.SPECIAL_DISCOUNT, EventConstant.SPECIAL_DISCOUNT_MONEY);
         }
     }
 
     private void applyGiftEvent() {
-        if (beforeDiscountPrice >= 120000) {
-            discountPrice.put("증정 이벤트", 25000);
+        if (beforeDiscountPrice >= EventConstant.GIFT_EVENT_MINIMUM) {
+            discountPrice.put(EventConstant.GIFT_EVENT, DrinkList.Champagne.getPrice());
         }
     }
 
