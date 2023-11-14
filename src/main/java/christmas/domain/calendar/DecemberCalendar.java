@@ -3,70 +3,75 @@ package christmas.domain.calendar;
 import java.util.Objects;
 
 public enum DecemberCalendar {
-    dayFirst(1, "금", false),
-    daySecond(2, "토", false),
-    dayThird(3, "일", true),
-    dayFourth(4, "월", false),
-    dayFifth(5, "화", false),
-    daySixth(6, "수", false),
-    daySeventh(7, "목", false),
-    dayEighth(8, "금", false),
-    dayNinth(9, "토", false),
-    dayTenth(10, "일", true),
-    dayELeventh(11, "월", false),
-    dayTwelfth(12, "화", false),
-    dayThirteenth(13, "수", false),
-    dayFourteenth(14, "목", false),
-    dayFifteenth(15, "금", false),
-    daySixtennth(16, "토", false),
-    daySeventeenth(17, "일", true),
-    dayEighteenth(18, "월", false),
-    dayNineteenth(19, "화", false),
-    dayTwentieth(20, "수", false),
-    dayTwentyFirst(21, "목", false),
-    dayTwentySecond(22, "금", false),
-    dayTwentyThird(23, "토", false),
-    dayTwentyFourth(24, "일", true),
-    dayTwentyFifth(25, "월", true),
-    dayTwentySixth(26, "화", false),
-    dayTwentySeventh(27, "수", false),
-    dayTwentyEighth(28, "목", false),
-    dayTwentyNinth(29, "금", false),
-    dayThirtieth(30, "토", false),
-    dayThirtyFirst(31, "일", false);
+    FIRST_DAY(1, "금", false),
+    SECOND_DAY(2, "토", false),
+    THIRD_DAY(3, "일", true),
+    FOURTH_DAY(4, "월", false),
+    FIFTH_DAY(5, "화", false),
+    SIXTH_DAY(6, "수", false),
+    SEVENTH_DAY(7, "목", false),
+    EIGHTH_DAY(8, "금", false),
+    NINTH_DAY(9, "토", false),
+    TENTH_DAY(10, "일", true),
+    ELEVENTH_DAY(11, "월", false),
+    TWELFTH_DAY(12, "화", false),
+    THIRTEENTH_DAY(13, "수", false),
+    FOURTEENTH_DAY(14, "목", false),
+    FIFTEENTH_DAY(15, "금", false),
+    SIXTEENTH_DAY(16, "토", false),
+    SEVENTEENTH_DAY(17, "일", true),
+    EIGHTEENTH_DAY(18, "월", false),
+    NINETEENTH_DAY(19, "화", false),
+    TWENTIETH_DAY(20, "수", false),
+    TWENTY_FIRST_DAY(21, "목", false),
+    TWENTY_SECOND_DAY(22, "금", false),
+    TWENTY_THIRD_DAY(23, "토", false),
+    TWENTY_FOURTH_DAY(24, "일", true),
+    TWENTY_FIFTH_DAY(25, "월", true),
+    TWENTY_SIXTH_DAY(26, "화", false),
+    TWENTY_SEVENTH_DAY(27, "수", false),
+    TWENTY_EIGHTH_DAY(28, "목", false),
+    TWENTY_NINTH_DAY(29, "금", false),
+    THIRTIETH_DAY(30, "토", false),
+    THIRTY_FIRST_DAY(31, "일", false);
 
     private final Integer date;
-    private final String day;
+    private final String dayOfTheWeek;
     private final boolean isStar;
 
-    public Integer getDate() {
-        return this.date;
-    }
-
-    public String getDay() {
-        return this.day;
-    }
-
-    public boolean isStar() {
-        return isStar;
-    }
-
-    public boolean getIsStar() {
-        return this.isStar;
-    }
-
-    DecemberCalendar(Integer date, String day, boolean isStar) {
+    DecemberCalendar(Integer date, String dayOfTheWeek, boolean isStar) {
         this.date = date;
-        this.day = day;
+        this.dayOfTheWeek = dayOfTheWeek;
         this.isStar = isStar;
     }
 
-    public static DecemberCalendar getDayInfo(Integer date) {
+    public static DecemberCalendar makeDayInfo(Integer date) {
         for (DecemberCalendar dayInfo : DecemberCalendar.values()) {
             if (Objects.equals(dayInfo.getDate(), date)) {
                 return dayInfo;
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public boolean isWeekday() {
+        return dayOfTheWeek.equals("일") || dayOfTheWeek.equals("월") || dayOfTheWeek.equals("화")
+                || dayOfTheWeek.equals("수") || dayOfTheWeek.equals("목");
+    }
+
+    public boolean isWeekend() {
+        return dayOfTheWeek.equals("금") || dayOfTheWeek.equals("토");
+    }
+
+    public Integer getDate() {
+        return this.date;
+    }
+
+    public String getDayOfTheWeek() {
+        return this.dayOfTheWeek;
+    }
+
+    public boolean isStar() {
+        return isStar;
     }
 }
