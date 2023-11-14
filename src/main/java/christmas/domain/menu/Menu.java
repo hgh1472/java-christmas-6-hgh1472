@@ -11,27 +11,17 @@ public class Menu {
     Integer count;
 
     public static Menu orderMenu(String name, Integer count) {
-        for (AppetizerList appetizer : AppetizerList.values()) {
-            if (appetizer.getMenuName().equals(name)) {
-                return new Appetizer(name, count);
-            }
+        if (AppetizerList.isAppetizer(name)) {
+            return new Appetizer(name, count);
         }
-        for (DessertList dessert : DessertList.values()) {
-            if (dessert.getMenuName().equals(name)) {
-                return new Dessert(name, count);
-            }
+        if (DessertList.isDessert(name)) {
+            return new Dessert(name, count);
         }
-
-        for (MainList main : MainList.values()) {
-            if (main.getMenuName().equals(name)) {
-                return new Main(name, count);
-            }
+        if (DrinkList.isDrink(name)) {
+            return new Drink(name, count);
         }
-
-        for (DrinkList drink : DrinkList.values()) {
-            if (drink.getMenuName().equals(name)) {
-                return new Drink(name, count);
-            }
+        if (MainList.isMain(name)) {
+            return new Main(name, count);
         }
         throw new IllegalArgumentException();
     }
