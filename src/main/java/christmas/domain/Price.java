@@ -79,7 +79,7 @@ public class Price {
     }
 
     private boolean canDiscount(MenuList menuList) {
-        return menuList.calculatePrice() >= 10000;
+        return menuList.calculatePrice() >= EventConstant.DISCOUNT_AVAILABLE_CHARGE;
     }
 
     public HashMap<String, Integer> getDiscountPrice() {

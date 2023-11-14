@@ -1,10 +1,10 @@
 package christmas.domain;
 
+import christmas.constants.EventConstant;
 import christmas.domain.badge.Badge;
 import christmas.domain.calendar.DecemberCalendar;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuList;
-import christmas.domain.menusheet.DrinkList;
 import christmas.validator.MenuValidator;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,17 @@ public class Order {
         this.dayInfo = dayInfo;
         this.menuList = menuList;
         this.price = Price.makePrice(this.dayInfo, this.menuList);
+        this.giftList = makeGiftList(this.price);
+        this.badge = Badge.makeBadge(price.calculateTotalDiscount());
+    }
+
+    private MenuList makeGiftList(Price price) {
         List<Menu> giftList = new ArrayList<>();
-        if (MenuValidator.canReceiveGift(this.price)) {
-            Menu gift = Menu.orderMenu(DrinkList.Champagne.getMenuName(), 1);
+        if (MenuValidator.canReceiveGift(price)) {
+            Menu gift = Menu.orderMenu(EventConstant.GIFT_MENU, EventConstant.GIFT_MENU_COUNT);
             giftList.add(gift);
         }
-        this.giftList = MenuList.makeGiftList(giftList);
-        this.badge = Badge.makeBadge(price.calculateTotalDiscount());
+        return MenuList.makeGiftList(giftList);
     }
 
     public static Order makeOrder(DecemberCalendar dayInfo, MenuList menuList) {
