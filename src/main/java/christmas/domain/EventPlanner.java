@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.constants.ErrorMessage;
+import christmas.constants.ErrorConstant;
 import christmas.domain.calendar.DecemberCalendar;
 import christmas.domain.menu.MenuList;
 import christmas.service.DateService;
@@ -23,7 +23,7 @@ public class EventPlanner {
         try {
             DateValidator.validateDate(input);
         } catch (IllegalArgumentException e) {
-            System.out.println(ErrorMessage.DATE_ERROR_MESSAGE);
+            System.out.println(ErrorConstant.DATE_ERROR_MESSAGE);
             return getDayInfo();
         }
         Integer date = DateService.makeInteger(input);
@@ -31,12 +31,12 @@ public class EventPlanner {
     }
 
     private MenuList makeMenuList() {
+        String input = InputView.readMenu();
         try {
-            String input = InputView.readMenu();
-            List<String> menuNameAndCount = MenuService.parseMenu(input);
-            return MenuService.makeMenuList(menuNameAndCount);
+            List<String> menus = MenuService.parseMenu(input);
+            return MenuService.makeMenuList(menus);
         } catch (IllegalArgumentException e) {
-            System.out.println(ErrorMessage.MENU_ERROR_MESSAGE);
+            System.out.println(ErrorConstant.MENU_ERROR_MESSAGE);
             return makeMenuList();
         }
     }
