@@ -44,7 +44,7 @@ public class MenuList {
         int count = 0;
         for (Menu menu : menuList) {
             if (menu instanceof Dessert) {
-                count++;
+                count += menu.getCount();
             }
         }
         return count;
@@ -54,7 +54,7 @@ public class MenuList {
         int count = 0;
         for (Menu menu : menuList) {
             if (menu instanceof Appetizer) {
-                count++;
+                count += menu.getCount();
             }
         }
         return count;
@@ -64,7 +64,7 @@ public class MenuList {
         int count = 0;
         for (Menu menu : menuList) {
             if (menu instanceof Main) {
-                count++;
+                count += menu.getCount();
             }
         }
         return count;
@@ -74,7 +74,7 @@ public class MenuList {
         int count = 0;
         for (Menu menu : this.menuList) {
             if (menu instanceof Drink) {
-                count++;
+                count += menu.getCount();
             }
         }
         return count;
