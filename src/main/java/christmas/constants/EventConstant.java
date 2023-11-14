@@ -1,6 +1,8 @@
 package christmas.constants;
 
 public class EventConstant {
+    public static final boolean IS_STAR = true;
+    public static final boolean IS_NOT_STAR = false;
     public static final int DISCOUNT_AVAILABLE_CHARGE = 10000;
     public static final String CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인";
     public static final int D_DAY_DISCOUNT_START_MONEY = 1000;
