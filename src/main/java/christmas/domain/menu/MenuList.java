@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.constants.ErrorConstant;
+import christmas.constants.EventConstant;
 import christmas.domain.menusheet.AppetizerList;
 import christmas.domain.menusheet.DessertList;
 import christmas.domain.menusheet.DrinkList;
@@ -35,7 +37,7 @@ public class MenuList {
     }
 
     public static MenuList makeGiftList(List<Menu> giftList) {
-        return new MenuList(giftList, true);
+        return new MenuList(giftList, EventConstant.IS_GIFT);
     }
 
     public Integer countDessertMenu() {
@@ -68,9 +70,9 @@ public class MenuList {
         return count;
     }
 
-    public Integer countDrinkMenu() {
+    public Integer getCountOfDrinkMenu() {
         int count = 0;
-        for (Menu menu : menuList) {
+        for (Menu menu : this.menuList) {
             if (menu instanceof Drink) {
                 count++;
             }
@@ -87,16 +89,24 @@ public class MenuList {
     }
 
     private void isOnlyDrink(List<Menu> menuList) {
+        int count = countDrinkInMenu(menuList);
+        if (areDrinkCountAndMenuCountSame(count, menuList)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private int countDrinkInMenu(List<Menu> menuList) {
         int count = 0;
         for (Menu menu : menuList) {
             if (menu instanceof Drink) {
                 count++;
             }
         }
-        if (count == menuList.size() && !menuList.isEmpty()) {
-            System.out.println("count : " + count + "size : " + menuList.size());
-            throw new IllegalArgumentException();
-        }
+        return count;
+    }
+
+    private boolean areDrinkCountAndMenuCountSame(int drinkCount, List<Menu> menuList) {
+        return drinkCount == menuList.size() && !menuList.isEmpty();
     }
 
     private void checkDuplicatedMenu(List<Menu> menuList) {
@@ -114,18 +124,19 @@ public class MenuList {
                 count++;
             }
         }
-        if (count == 1) {
-            return false;
-        }
-        return true;
+        /*
+        메뉴 리스트에서 메뉴의 이름은 중복되어서는 안된다. = count는 1이어야만 한다.
+         */
+        return count != 1;
     }
+
 
     private void isPossibleTotalCount(List<Menu> menuList) {
         int totalCount = 0;
         for (Menu menu : menuList) {
             totalCount += menu.count;
         }
-        if (totalCount > 20) {
+        if (totalCount > ErrorConstant.MAXIMUM_ORDER_COUNT) {
             throw new IllegalArgumentException();
         }
     }
