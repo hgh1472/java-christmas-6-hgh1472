@@ -1,30 +1,26 @@
 package christmas.validator;
 
+import christmas.domain.calendar.DecemberCalendar;
+
 public class DateValidator {
 
     public static void validateDate(String input) {
-        if (!isNumber(input)) {
-            throw new IllegalArgumentException();
-        }
+        isNumber(input);
         int date = Integer.parseInt(input);
-        if (!isValidDate(date)) {
-            throw new IllegalArgumentException();
-        }
+        isValidDate(date);
     }
 
-    public static boolean isNumber(String input) {
+    public static void isNumber(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            return false;
+            throw new IllegalArgumentException();
         }
-        return true;
     }
 
-    public static boolean isValidDate(int date) {
-        if (!(1 <= date && date <= 31)) {
-            return false;
+    public static void isValidDate(int date) {
+        if (!(DecemberCalendar.FIRST_DAY.getDate() <= date && date <= DecemberCalendar.THIRTY_FIRST_DAY.getDate())) {
+            throw new IllegalArgumentException();
         }
-        return true;
     }
 }
