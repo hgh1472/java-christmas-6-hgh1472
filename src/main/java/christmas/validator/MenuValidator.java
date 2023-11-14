@@ -1,16 +1,11 @@
 package christmas.validator;
 
+import christmas.constants.EventConstant;
 import christmas.domain.Price;
-import christmas.service.MenuService;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MenuValidator {
-    public static void ValidateMenu(String input) {
-        List<String> menus = MenuService.parseMenu(input);
-    }
-
     private boolean isValidCount(Integer count) {
         return count >= 1;
     }
@@ -25,7 +20,7 @@ public class MenuValidator {
     }
 
     public static boolean canReceiveGift(Price price) {
-        if (price.getBeforeDiscountPrice() >= 120000) {
+        if (price.getBeforeDiscountPrice() >= EventConstant.GIFT_EVENT_MINIMUM) {
             return true;
         }
         return false;
