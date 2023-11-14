@@ -1,12 +1,11 @@
 package christmas.validator;
 
 public class IntegerValidator {
-    public static boolean isNumber(String input) {
+    public static void isNumber(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            return false;
+            throw new IllegalArgumentException();
         }
-        return true;
     }
 }

@@ -1,21 +1,14 @@
 package christmas.validator;
 
 import christmas.domain.calendar.DecemberCalendar;
+import christmas.service.DateService;
 
 public class DateValidator {
 
     public static void validateDate(String input) {
-        isNumber(input);
-        int date = Integer.parseInt(input);
+        IntegerValidator.isNumber(input);
+        int date = DateService.makeInteger(input);
         isValidDate(date);
-    }
-
-    public static void isNumber(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public static void isValidDate(int date) {
