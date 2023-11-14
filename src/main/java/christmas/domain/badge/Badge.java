@@ -1,6 +1,6 @@
 package christmas.domain.badge;
 
-import christmas.constants.BadgeConstants;
+import christmas.constants.BadgeConstant;
 
 public class Badge {
 
@@ -18,14 +18,14 @@ public class Badge {
     }
 
     private static boolean isSantaBadge(int discountPrice) {
-        return discountPrice >= BadgeConstants.SantaBadgeCost;
+        return discountPrice >= BadgeConstant.SantaBadgeCost;
     }
 
     private static boolean isTreeBadge(int discountPrice) {
-        return BadgeConstants.TreeBadgeCost <= discountPrice && discountPrice < BadgeConstants.SantaBadgeCost;
+        return BadgeConstant.TreeBadgeCost <= discountPrice && discountPrice < BadgeConstant.SantaBadgeCost;
     }
 
     private static boolean isStarBadge(int discountPrice) {
-        return BadgeConstants.StarBadgeCost <= discountPrice && discountPrice < BadgeConstants.SantaBadgeCost;
+        return BadgeConstant.StarBadgeCost <= discountPrice && discountPrice < BadgeConstant.SantaBadgeCost;
     }
 }
