@@ -9,7 +9,7 @@ public class Price {
     private final Integer beforeDiscountPrice;
     private final HashMap<String, Integer> discountPrice = new HashMap<>();
 
-    Price(DecemberCalendar dayInfo, MenuList menuList) {
+    private Price(DecemberCalendar dayInfo, MenuList menuList) {
         this.beforeDiscountPrice = menuList.calculatePrice();
         if (canDiscount(menuList)) {
             applyDiscount(dayInfo, menuList);
@@ -79,7 +79,11 @@ public class Price {
         return menuList.calculatePrice() >= 10000;
     }
 
+    public HashMap<String, Integer> getDiscountPrice() {
+        return this.discountPrice;
+    }
+
     public Integer getBeforeDiscountPrice() {
-        return beforeDiscountPrice;
+        return this.beforeDiscountPrice;
     }
 }
