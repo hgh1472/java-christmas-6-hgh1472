@@ -148,7 +148,7 @@ public class MenuList {
         }
     }
 
-    public static void isMenu(String menuName) {
+    private static void isMenu(String menuName) {
         if (AppetizerList.isAppetizer(menuName)) {
             return;
         }
