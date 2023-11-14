@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.constants.BadgeConstants;
+import christmas.constants.BadgeConstant;
 import christmas.constants.OutputMessage;
 import christmas.domain.Order;
 import christmas.domain.Price;
@@ -91,15 +91,15 @@ public class OutputView {
     public static void printBadge(Badge badge) {
         System.out.println(OutputMessage.EVENTBADGE);
         if (badge instanceof StarBadge) {
-            System.out.println(BadgeConstants.StarBadge);
+            System.out.println(BadgeConstant.StarBadge);
             return;
         }
         if (badge instanceof TreeBadge) {
-            System.out.println(BadgeConstants.TreeBadge);
+            System.out.println(BadgeConstant.TreeBadge);
             return;
         }
         if (badge instanceof SantaBadge) {
-            System.out.println(BadgeConstants.SantaBadge);
+            System.out.println(BadgeConstant.SantaBadge);
             return;
         }
         System.out.println(OutputMessage.NONE);
