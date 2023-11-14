@@ -1,11 +1,12 @@
 package christmas.domain.menu;
 
-import christmas.domain.menusheet.AppetizerList;
+import christmas.domain.menusheet.MainList;
 
 public class Main extends Menu {
-    Main(String menuName) {
+    Main(String menuName, Integer count) {
         this.menuName = menuName;
-        AppetizerList appetizer = AppetizerList.getAppetizer(menuName);
-        this.price = appetizer.getPrice();
+        MainList main = MainList.getMain(menuName);
+        this.price = main.getPrice();
+        this.count = count;
     }
 }
