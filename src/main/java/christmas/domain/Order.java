@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    DecemberCalendar dayInfo;
-    MenuList menuList;
-    Price price;
-    Badge badge;
-    MenuList giftList;
+    private final DecemberCalendar dayInfo;
+    private final MenuList menuList;
+    private final Price price;
+    private final Badge badge;
+    private final MenuList giftList;
 
     private Order(DecemberCalendar dayInfo, MenuList menuList) {
         this.dayInfo = dayInfo;
